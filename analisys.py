@@ -8,7 +8,7 @@ def statisticalAnalysis(compTuple1,compTuple2):
   #tuple = (name,data)
   # Assuming your CSV file has columns named 'data1' and 'data2', you can access these columns like this:
   name1 = compTuple1[0]
-  name2 = compTuple1[0]
+  name2 = compTuple2[0]
   data1 = compTuple1[1]['time']
   data2 = compTuple2[1]['time']
   # Calculate mean and standard deviation
@@ -40,7 +40,7 @@ for path in filepaths:
   df = pd.read_csv(path)
   dataframes.append(df)
 
-for i in range(len(dataframes[1:])):
+for i in range(1,len(dataframes)):
    statisticalAnalysis((filepaths[0],dataframes[0]),(filepaths[i],dataframes[i]))
 
 
