@@ -46,7 +46,6 @@ public class KnapsackGAPartiallyParallel implements KnapsackInterface {
            // Individual best = ParallelBestOfPopulation();
             System.out.println("Best at generation " + generation + " is " + best + " with "
                     + best.fitness);
-            Random r = new Random();
             // Step3 - Find parents to mate (cross-over)
             Individual[] newPopulation = new Individual[POP_SIZE];
             newPopulation[0] = best; // The best individual remains
