@@ -28,7 +28,7 @@ def statisticalAnalysis(compTuple1,compTuple2):
   if p > alpha:
       print('Same distribution (fail to reject H0) ')
   else:
-      print('Different distribution (reject H0) '+name2 + ' has a relevant differente between distributions comparing to '+ name2)
+      print('Different distribution (reject H0) '+name2 + ' has a relevant differente between distributions comparing to '+ name1)
   print("\n")
 # Load data from CSV file
 filepaths = ['KnapsackGA.csv','KnapsackAlmostFullyParallel.csv','KnapsackFullyParallel.csv',
