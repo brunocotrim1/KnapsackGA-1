@@ -30,11 +30,6 @@ public class KnapsackGAPartiallyParallel implements KnapsackInterface {
             }
         }), POP_SIZE);
     }
-
-    public static void main(String[] args) {
-        KnapsackGAPartiallyParallel a = new KnapsackGAPartiallyParallel();
-    }
-
     public void run() {
         for (int generation = 0; generation < N_GENERATIONS; generation++) {
 
@@ -105,20 +100,6 @@ public class KnapsackGAPartiallyParallel implements KnapsackInterface {
             }
         }
         return best;
-    }
-    private Individual ParallelBestOfPopulation(){
-        final Individual[] best = {population[0]};
-        ParallelFW.doInParallel(((startIndex, endIndex) -> {
-            for (Individual other : population) {
-                synchronized (best[0]){
-                    if (other.fitness > best[0].fitness) {
-                        best[0] = other;
-                    }
-                }
-
-            }
-        }), POP_SIZE);
-        return best[0];
     }
     private Individual bestOfPopulation() {
         /*
