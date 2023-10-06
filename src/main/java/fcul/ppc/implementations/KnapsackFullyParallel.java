@@ -53,7 +53,7 @@ public class KnapsackFullyParallel implements KnapsackInterface {
                     try {
                         //This block aims to make every thread wait for the last one so there are no concurrent accesses
                         //to the population when finding the best and running the other steps of the algorithm
-                        if (waiter.addAndGet(1) == Runtime.getRuntime().availableProcessors()) {
+                        if (waiter.addAndGet(1) == Runtime.getRuntime().availableProcessors()/2) {
                             waiter.notifyAll();
                         } else {
                             waiter.wait();

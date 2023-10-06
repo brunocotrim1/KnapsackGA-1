@@ -24,12 +24,12 @@ public class KnapsackMain {
         timedKnapsackExecution(knapsackFullyParallel);//Slower because we waster more time waiting for others in each generation then creating threads and proecess all at once separatelly
         timedKnapsackExecution(knapsackAlmostFullyParallel);
         timedKnapsackExecution(gaPartiallyParallel);
-        timedKnapsackExecution(ga);
+        //timedKnapsackExecution(ga);
     }
 
     public static void timedKnapsackExecution(KnapsackInterface knapsack) {
         try {
-            FileWriter fileWriter = new FileWriter(knapsack.getClass().getName().split("\\.")[3] + ".csv");
+            FileWriter fileWriter = new FileWriter(knapsack.getClass().getName().split("\\.")[3] + "_4C.csv");
             CSVPrinter csvPrinter = new CSVPrinter(fileWriter, CSVFormat.DEFAULT.withHeader("iteration", "time"));
             List<List<String>> data = new ArrayList<>();
 

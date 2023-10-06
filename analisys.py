@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from scipy.stats import mannwhitneyu
 import matplotlib.pyplot as plt
-
+import sys
 def statisticalAnalysis(compTuple1,compTuple2):
   print("\n")
   #tuple = (name,data)
@@ -31,12 +31,17 @@ def statisticalAnalysis(compTuple1,compTuple2):
       print('Different distribution (reject H0) '+name2 + ' has a relevant differente between distributions comparing to '+ name1)
   print("\n")
 # Load data from CSV file
-filepaths = ['KnapsackGA.csv','KnapsackAlmostFullyParallel.csv','KnapsackFullyParallel.csv',
-             'KnapsackFullyParallelSplitPop.csv','KnapsackGAPartiallyParallel.csv']
-
+filepaths = ['KnapsackGA','KnapsackAlmostFullyParallel','KnapsackFullyParallel',
+             'KnapsackFullyParallelSplitPop','KnapsackGAPartiallyParallel']
 
 dataframes = []
 for path in filepaths:
+  
+  if  len(sys.argv) > 1 and sys.argv[1] == "4" and path != 'KnapsackGA':
+     path = path + '_4C.csv'
+  else:
+      path = path + '.csv'
+  print(path)
   df = pd.read_csv(path)
   dataframes.append(df)
 
@@ -73,7 +78,10 @@ ax.set_title('Parallel Algoritmh Analisys')
 # Adjust the left margin or padding
 plt.subplots_adjust(left=0.3)  # Adjust this value as needed
 # Save the plot as a PNG file
-plt.savefig('boxplot.png', dpi=300, bbox_inches='tight')  # Adjust the file name and DPI as needed
+if len(sys.argv) > 1 and sys.argv[1] == "4":
+    plt.savefig('boxplot_4C.png', dpi=300, bbox_inches='tight')  # Adjust the file name and DPI as needed
+else:
+    plt.savefig('boxplot_8C.png', dpi=300, bbox_inches='tight')  # Adjust the file name and DPI as needed
 
 # Show the plot
 #plt.show()

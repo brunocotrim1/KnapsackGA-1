@@ -3,7 +3,7 @@ package fcul.ppc.parallelization;
 public class ParallelFW {
     public static void doInParallel(Parallelizable pw, int iterations) {
         int nThreads = Math.min(iterations, Runtime.getRuntime().availableProcessors());
-        doInParallel(pw, iterations, nThreads);
+        doInParallel(pw, iterations, nThreads/2);
     }
 
     public static void doInParallel(Parallelizable pw, int iterations, int nThreads) {
