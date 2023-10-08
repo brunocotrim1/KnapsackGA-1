@@ -60,10 +60,10 @@ public class KnapsackGAPartiallyParallel implements KnapsackInterface {
     }
 
     private void ParallelMate(Individual[] newPopulation) {
-        //Even-tough multiple parents might be selected at the same time, since they will not be modified, and only
-        //their genes will be selected("read") in the crossover, no inconsistencies in the reads might occur since
-        //there are no writes, and different indexes(across threads) in the new population will
-        //have new unique individuals
+/*        Even-tough multiple parents might be selected at the same time, since they will not be modified, and only
+        their genes will be selected("read") in the crossover, no inconsistencies in the reads might occur since
+        there are no writes, and different indexes(across threads) in the new population will
+        have new unique individuals*/
         ThreadLocalRandom r = ThreadLocalRandom.current();
         ParallelFW.doInParallel(((startIndex, endIndex) -> {
             for (int i = startIndex; i < endIndex; i++) {

@@ -3,7 +3,7 @@ import numpy as np
 from scipy.stats import mannwhitneyu
 import matplotlib.pyplot as plt
 import sys
-def statisticalAnalysis(compTuple1,compTuple2):
+def statisticalAnalysis(compTuple1,compTuple2,dfResults):
   print("\n")
   #tuple = (name,data)
   # Assuming your CSV file has columns named 'data1' and 'data2', you can access these columns like this:
@@ -26,10 +26,19 @@ def statisticalAnalysis(compTuple1,compTuple2):
   # interpret
   alpha = 0.05
   if p > alpha:
-      print('Same distribution (fail to reject H0) ')
+    row_series = pd.Series((name1, name2, round(p, 5), stat, False), index=columns)
+    dfResults = pd.concat([dfResults, row_series.to_frame().T], ignore_index=False)
+    print('Same distribution (fail to reject H0)') 
   else:
-      print('Different distribution (reject H0) '+name2 + ' has a relevant differente between distributions comparing to '+ name1)
+    row_series = pd.Series((name1, name2, round(p, 5), stat, True), index=columns)
+    dfResults = pd.concat([dfResults, row_series.to_frame().T], ignore_index=True)
+    print('Different distribution (reject H0) ' + name2 + ' has a relevant difference between distributions comparing to ' + name1)
+  print(dfResults)
   print("\n")
+  return dfResults  # Return the modified DataFrame
+
+
+
 # Load data from CSV file
 filepaths = ['KnapsackGA','KnapsackAlmostFullyParallel','KnapsackFullyParallel',
              'KnapsackFullyParallelSplitPop','KnapsackGAPartiallyParallel']
@@ -45,10 +54,13 @@ for path in filepaths:
   df = pd.read_csv(path)
   dataframes.append(df)
 
-for i in range(1,len(dataframes)):
-   statisticalAnalysis((filepaths[0],dataframes[0]),(filepaths[i],dataframes[i]))
+columns = ['Algorithm', 'ComparedAlgorithm', 'p', 'stat', 'StatisticalDifference']
+dfResults = pd.DataFrame(columns=columns)
+for i in range(len(dataframes)):
+   for j in range(len(dataframes)):
+    dfResults = statisticalAnalysis((filepaths[i], dataframes[i]), (filepaths[j], dataframes[j]), dfResults)
 
-
+print(dfResults)
 import matplotlib.pyplot as plt
 import screeninfo  # You may need to install this library
 
@@ -78,10 +90,18 @@ ax.set_title('Parallel Algoritmh Analisys')
 # Adjust the left margin or padding
 plt.subplots_adjust(left=0.3)  # Adjust this value as needed
 # Save the plot as a PNG file
+
 if len(sys.argv) > 1 and sys.argv[1] == "4":
     plt.savefig('boxplot_4C.png', dpi=300, bbox_inches='tight')  # Adjust the file name and DPI as needed
+    # Define the CSV file name
+    csv_file = 'StatResults_4C.csv'
+
+    # Write the DataFrame to a CSV file
+    dfResults.to_csv(csv_file, header=True, index=False)
 else:
     plt.savefig('boxplot_8C.png', dpi=300, bbox_inches='tight')  # Adjust the file name and DPI as needed
+    csv_file = 'StatResults_8C.csv'
+    dfResults.to_csv(csv_file, header=True, index=False)
 
 # Show the plot
 #plt.show()
