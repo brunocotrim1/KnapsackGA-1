@@ -26,11 +26,15 @@ def statisticalAnalysis(compTuple1,compTuple2,dfResults):
   # interpret
   alpha = 0.05
   if p > alpha:
-    row_series = pd.Series((name1, name2, round(p, 5), stat, False), index=columns)
+    row_series = pd.Series((name1, name2, round(p, 5), stat, False,"",""), index=columns)
+    if name1 == name2:
+       row_series = pd.Series((name1, name2, round(p, 5), stat, False,round(mean_data1, 5),round(std_data1, 5)), index=columns)
     dfResults = pd.concat([dfResults, row_series.to_frame().T], ignore_index=False)
     print('Same distribution (fail to reject H0)') 
   else:
-    row_series = pd.Series((name1, name2, round(p, 5), stat, True), index=columns)
+    row_series = pd.Series((name1, name2, round(p, 5), stat, True,"",""), index=columns)
+    if name1 == name2:
+       row_series = pd.Series((name1, name2, round(p, 5), stat, False,round(mean_data1, 5),round(std_data1, 5)), index=columns)
     dfResults = pd.concat([dfResults, row_series.to_frame().T], ignore_index=True)
     print('Different distribution (reject H0) ' + name2 + ' has a relevant difference between distributions comparing to ' + name1)
   print(dfResults)
@@ -54,7 +58,7 @@ for path in filepaths:
   df = pd.read_csv(path)
   dataframes.append(df)
 
-columns = ['Algorithm', 'ComparedAlgorithm', 'p', 'stat', 'StatisticalDifference']
+columns = ['Algorithm', 'ComparedAlgorithm', 'p', 'stat', 'StatisticalDifference','Mean','Stdv']
 dfResults = pd.DataFrame(columns=columns)
 for i in range(len(dataframes)):
    for j in range(len(dataframes)):
