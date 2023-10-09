@@ -54,8 +54,8 @@ public class KnapsackFullyParallelSplitPop implements KnapsackInterface {
                 ThreadLocalRandom r = ThreadLocalRandom.current();
                 for (int i = startIndex; i < endIndex; i++) {
                     // We select two parents, using a tournament.
-                    Individual parent1 = tournament(TOURNAMENT_SIZE, r);
-                    Individual parent2 = tournament(TOURNAMENT_SIZE, r);
+                    Individual parent1 = tournament(TOURNAMENT_SIZE, r,startIndex,endIndex);
+                    Individual parent2 = tournament(TOURNAMENT_SIZE, r,startIndex,endIndex);
 
                     newPopulation[i] = parent1.crossoverWith(parent2, r);
                 }
@@ -73,14 +73,14 @@ public class KnapsackFullyParallelSplitPop implements KnapsackInterface {
         }
     }
 
-    private Individual tournament(int tournamentSize, Random r) {
+    private Individual tournament(int tournamentSize, Random r,int startIndex,int endIndex) {
         /*
          * In each tournament, we select tournamentSize individuals at random, and we
          * keep the best of those.
          */
-        Individual best = population[r.nextInt(POP_SIZE)];
+        Individual best = population[randomBetweenInterval(startIndex,endIndex,r)];
         for (int i = 0; i < tournamentSize; i++) {
-            Individual other = population[r.nextInt(POP_SIZE)];
+            Individual other = population[randomBetweenInterval(startIndex,endIndex,r)];
             if (other.fitness > best.fitness) {
                 best = other;
             }
@@ -100,5 +100,7 @@ public class KnapsackFullyParallelSplitPop implements KnapsackInterface {
         }
         return best;
     }
-
+    private int randomBetweenInterval(int min, int max,Random r) {
+        return r.nextInt(min, max);
+    }
 }

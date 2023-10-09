@@ -24,7 +24,7 @@ public class KnapsackMain {
         timedKnapsackExecution(knapsackFullyParallel);//Slower because we waster more time waiting for others in each generation then creating threads and proecess all at once separatelly
         timedKnapsackExecution(knapsackAlmostFullyParallel);
         timedKnapsackExecution(gaPartiallyParallel);
-        //timedKnapsackExecution(ga);
+        timedKnapsackExecution(ga);
     }
 
     public static void timedKnapsackExecution(KnapsackInterface knapsack) {
@@ -39,6 +39,7 @@ public class KnapsackMain {
                 knapsack.run();
                 Instant finish = Instant.now();
                 long timeElapsed = Duration.between(start, finish).toMillis();
+                System.out.println("Time taken: " + (double)timeElapsed/1000 + " seconds");
                 data.add(Arrays.asList(Integer.toString(i),Double.toString( (double) timeElapsed / 1000)));
             }
             for (List<String> rowData : data) {

@@ -7,7 +7,7 @@ KnapsackGA,KnapsackGAPartiallyParallel,0.0,900.0,True
 KnapsackAlmostFullyParallel,KnapsackGA,0.0,0.0,True
 KnapsackAlmostFullyParallel,KnapsackAlmostFullyParallel,1.0,450.0,False
 KnapsackAlmostFullyParallel,KnapsackFullyParallel,0.0,0.0,True
-KnapsackAlmostFullyParallel,KnapsackFullyParallelSplitPop,4e-05,729.0,True
+KnapsackAlmostFullyParallel,KnapsackFullyParallelSplitPop,0.0,871.0,True
 KnapsackAlmostFullyParallel,KnapsackGAPartiallyParallel,0.0,29.0,True
 KnapsackFullyParallel,KnapsackGA,0.0,0.0,True
 KnapsackFullyParallel,KnapsackAlmostFullyParallel,0.0,900.0,True
@@ -15,12 +15,12 @@ KnapsackFullyParallel,KnapsackFullyParallel,1.0,450.0,False
 KnapsackFullyParallel,KnapsackFullyParallelSplitPop,0.0,900.0,True
 KnapsackFullyParallel,KnapsackGAPartiallyParallel,0.0,900.0,True
 KnapsackFullyParallelSplitPop,KnapsackGA,0.0,0.0,True
-KnapsackFullyParallelSplitPop,KnapsackAlmostFullyParallel,4e-05,171.0,True
+KnapsackFullyParallelSplitPop,KnapsackAlmostFullyParallel,0.0,29.0,True
 KnapsackFullyParallelSplitPop,KnapsackFullyParallel,0.0,0.0,True
 KnapsackFullyParallelSplitPop,KnapsackFullyParallelSplitPop,1.0,450.0,False
-KnapsackFullyParallelSplitPop,KnapsackGAPartiallyParallel,0.0,65.0,True
+KnapsackFullyParallelSplitPop,KnapsackGAPartiallyParallel,0.0,28.0,True
 KnapsackGAPartiallyParallel,KnapsackGA,0.0,0.0,True
 KnapsackGAPartiallyParallel,KnapsackAlmostFullyParallel,0.0,871.0,True
 KnapsackGAPartiallyParallel,KnapsackFullyParallel,0.0,0.0,True
-KnapsackGAPartiallyParallel,KnapsackFullyParallelSplitPop,0.0,835.0,True
+KnapsackGAPartiallyParallel,KnapsackFullyParallelSplitPop,0.0,872.0,True
 KnapsackGAPartiallyParallel,KnapsackGAPartiallyParallel,1.0,450.0,False
