@@ -31,14 +31,6 @@ public class KnapsackFullyParallel implements KnapsackInterface {
 
     public void run() {
         for (int generation = 0; generation < N_GENERATIONS; generation++) {
-
-            // Step1 - Calculate Fitness
-            //This will be the only one made in parallel since we need calculate fitness before advancing the algorithm
-            //for this we shall wait for all threads to end their execution(done with the primitives learned at the moment)
-            // in order to find the best across the whole
-            //population,
-            ParallelMeasureFitness();
-
             //Now I will make the following section running in a single Parallel Task in order to not waste time creating
             //and destroying threads and see how much that impacts performance
             AtomicReference<Individual> best = new AtomicReference<>(null);
