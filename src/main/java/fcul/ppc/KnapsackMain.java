@@ -15,16 +15,26 @@ import java.util.List;
 
 public class KnapsackMain {
     public static void main(String[] args) {
+        boolean writeFiles = false;
         KnapsackGA ga = new KnapsackGA();
         KnapsackGAPartiallyParallel gaPartiallyParallel = new KnapsackGAPartiallyParallel();
         KnapsackFullyParallel knapsackFullyParallel = new KnapsackFullyParallel();
         KnapsackAlmostFullyParallel knapsackAlmostFullyParallel = new KnapsackAlmostFullyParallel();
         KnapsackFullyParallelSplitPop knapsackFullyParallelSplitPop = new KnapsackFullyParallelSplitPop();
-        timedKnapsackExecution(knapsackFullyParallelSplitPop);
-        timedKnapsackExecution(knapsackFullyParallel);//Slower because we waster more time waiting for others in each generation then creating threads and proecess all at once separatelly
-        timedKnapsackExecution(knapsackAlmostFullyParallel);
-        timedKnapsackExecution(gaPartiallyParallel);
-        timedKnapsackExecution(ga);
+        if(writeFiles) {
+            timedKnapsackExecution(knapsackFullyParallelSplitPop);
+            timedKnapsackExecution(knapsackFullyParallel);//Slower because we waster more time waiting for others in each generation then creating threads and proecess all at once separatelly
+            timedKnapsackExecution(knapsackAlmostFullyParallel);
+            timedKnapsackExecution(gaPartiallyParallel);
+            timedKnapsackExecution(ga);
+        }else {
+            knapsackFullyParallelSplitPop.run();
+            knapsackFullyParallel.run();
+            knapsackAlmostFullyParallel.run();
+            gaPartiallyParallel.run();
+            ga.run();
+        }
+
     }
 
     public static void timedKnapsackExecution(KnapsackInterface knapsack) {
