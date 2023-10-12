@@ -3,6 +3,8 @@ import numpy as np
 from scipy.stats import mannwhitneyu
 import matplotlib.pyplot as plt
 import sys
+import matplotlib.pyplot as plt
+import screeninfo
 def statisticalAnalysis(compTuple1,compTuple2,dfResults):
   print("\n")
   #tuple = (name,data)
@@ -65,8 +67,7 @@ for i in range(len(dataframes)):
     dfResults = statisticalAnalysis((filepaths[i], dataframes[i]), (filepaths[j], dataframes[j]), dfResults)
 
 print(dfResults)
-import matplotlib.pyplot as plt
-import screeninfo  # You may need to install this library
+
 
 # Get the screen width and height
 screen = screeninfo.get_monitors()[0]  # Assuming the first monitor
@@ -74,36 +75,31 @@ screen_width = screen.width
 
 # Calculate the figure size with a specified aspect ratio (e.g., 16:9)
 aspect_ratio = 16 / 9
-fig_width = (screen_width - 200) / 100  # Convert screen width to inches (adjust as needed)
+fig_width = (screen_width - 200) / 100 # Inches
 fig_height = fig_width / aspect_ratio
 
 # Create a figure with the calculated size
 fig, ax = plt.subplots(figsize=(fig_width, fig_height))
 
-# Transpose data1 and data2 for plotting
+
 transposed_data = [df['time'] for df in dataframes[1:]]
 
 # Create a boxplot with labels on the Y-axis and values on the X-axis
 ax.boxplot(transposed_data, vert=False, labels=filepaths[1:], whis=1.5)  # Adjust the value as needed
 
-# Set labels and title
 ax.set_xlabel('Time(s)')
 ax.set_ylabel('Algoritmh')
 ax.set_title('Parallel Algoritmh Analisys')
-
-# Adjust the left margin or padding
-plt.subplots_adjust(left=0.3)  # Adjust this value as needed
-# Save the plot as a PNG file
-
+plt.subplots_adjust(left=0.3)
 if len(sys.argv) > 1 and sys.argv[1] == "4":
-    plt.savefig('boxplot_4C.png', dpi=300, bbox_inches='tight')  # Adjust the file name and DPI as needed
+    plt.savefig('boxplot_4C.png', dpi=300, bbox_inches='tight')
     # Define the CSV file name
     csv_file = 'StatResults_4C.csv'
 
     # Write the DataFrame to a CSV file
     dfResults.to_csv(csv_file, header=True, index=False)
 else:
-    plt.savefig('boxplot_8C.png', dpi=300, bbox_inches='tight')  # Adjust the file name and DPI as needed
+    plt.savefig('boxplot_8C.png', dpi=300, bbox_inches='tight')
     csv_file = 'StatResults_8C.csv'
     dfResults.to_csv(csv_file, header=True, index=False)
 
