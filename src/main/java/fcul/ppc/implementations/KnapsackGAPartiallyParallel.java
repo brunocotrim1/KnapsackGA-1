@@ -67,9 +67,10 @@ public class KnapsackGAPartiallyParallel implements KnapsackInterface {
         ThreadLocalRandom r = ThreadLocalRandom.current();
         ParallelFW.doInParallel(((startIndex, endIndex) -> {
             for (int i = startIndex; i < endIndex; i++) {
+                if(i==0)
+                    continue;
                 Individual parent1 = tournament(TOURNAMENT_SIZE, r);
                 Individual parent2 = tournament(TOURNAMENT_SIZE, r);
-
                 newPopulation[i] = parent1.crossoverWith(parent2, r);
             }
         }), POP_SIZE);
@@ -80,6 +81,8 @@ public class KnapsackGAPartiallyParallel implements KnapsackInterface {
         //so there is no need to waste time locking the individuals
         ParallelFW.doInParallel(((startIndex, endIndex) -> {
             for (int i = startIndex; i < endIndex; i++) {
+                if(i==0)
+                    continue;
                 if (ThreadLocalRandom.current().nextDouble() < PROB_MUTATION) {
                     newPopulation[i].mutate(ThreadLocalRandom.current());
                 }

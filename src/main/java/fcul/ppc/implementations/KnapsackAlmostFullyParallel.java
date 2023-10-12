@@ -56,6 +56,8 @@ public class KnapsackAlmostFullyParallel implements KnapsackInterface {
                 newPopulation[0] = best.get(); // The best individual remains
                 ThreadLocalRandom r = ThreadLocalRandom.current();
                 for (int i = startIndex; i < endIndex; i++) {
+                    if(i==0)
+                        continue;
                     // We select two parents, using a tournament.
                     Individual parent1 = tournament(TOURNAMENT_SIZE, r);
                     Individual parent2 = tournament(TOURNAMENT_SIZE, r);
@@ -63,6 +65,8 @@ public class KnapsackAlmostFullyParallel implements KnapsackInterface {
                 }
                 // Step4 - Mutate
                 for (int i = startIndex; i < endIndex; i++) {
+                    if(i==0)
+                        continue;
                     if (r.nextDouble() < PROB_MUTATION) {
                         newPopulation[i].mutate(r);
                     }

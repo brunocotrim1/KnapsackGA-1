@@ -52,7 +52,7 @@ public class KnapsackFullyParallelSplitPop implements KnapsackInterface {
                 // Step3 - Find parents to mate (cross-over)
                 newPopulation[startIndex] = bestLocal; // The best individual remains
                 ThreadLocalRandom r = ThreadLocalRandom.current();
-                for (int i = startIndex; i < endIndex; i++) {
+                for (int i = startIndex+1; i < endIndex; i++) {
                     // We select two parents, using a tournament.
                     Individual parent1 = tournament(TOURNAMENT_SIZE, r,startIndex,endIndex);
                     Individual parent2 = tournament(TOURNAMENT_SIZE, r,startIndex,endIndex);
@@ -61,7 +61,7 @@ public class KnapsackFullyParallelSplitPop implements KnapsackInterface {
                 }
 
                 // Step4 - Mutate
-                for (int i = startIndex; i < endIndex; i++) {
+                for (int i = startIndex+1; i < endIndex; i++) {
                     if (r.nextDouble() < PROB_MUTATION) {
                         newPopulation[i].mutate(r);
                     }
